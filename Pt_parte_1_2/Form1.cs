@@ -27,7 +27,8 @@ namespace Pt_parte_1_2
             {
                 if (pictureBox1.Image == null)
                 {
-            pictureBox1.Image = new Bitmap(dlg.FileName);
+            pictureBox1.BackgroundImage = new Bitmap(ofd.FileName);
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
                     removeToolStripMenuItem.Enabled = true;
                     addToolStripMenuItem.Enabled = false;
 
@@ -41,7 +42,7 @@ namespace Pt_parte_1_2
         {
             if (pictureBox1 != null)
             {
-                pictureBox1.Image = null;
+                pictureBox1.BackgroundImage = null;
                 removeToolStripMenuItem.Enabled = false;
                 addToolStripMenuItem.Enabled = true;
             }
@@ -55,7 +56,7 @@ namespace Pt_parte_1_2
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-              if (pictureBox1.Image != null)
+              if (pictureBox1.BackgroundImage != null)
             {
                 OpenFileDialog dlg = new OpenFileDialog();
 
@@ -64,12 +65,37 @@ namespace Pt_parte_1_2
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     
-                    pictureBox1.Image = new Bitmap(dlg.FileName);
+                    pictureBox1.BackgroundImage = new Bitmap(dlg.FileName);
 
 
                 }
             }
             else { MessageBox.Show("Miss image","Erroo", MessageBoxButtons.OK);
+            }
+        }
+
+        private void backgroundImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Into image";
+            ofd.FileName = "Image .jpg|.png ";
+            if (ofd.ShowDialog() == DialogResult.OK) {
+                BackgroundImage = new Bitmap(ofd.FileName);
+                BackgroundImageLayout = ImageLayout.Stretch;
+
+            }
+        }
+
+        private void removeToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (BackgroundImage != null) {
+                BackgroundImage = null;
+
             }
         }
         }
