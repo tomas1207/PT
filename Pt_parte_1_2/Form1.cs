@@ -98,6 +98,23 @@ namespace Pt_parte_1_2
 
             }
         }
+
+        private void editToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Edit image";
+            ofd.FileName = "upload image|.png";
+            if (BackgroundImage != null) {
+                if (ofd.ShowDialog() == DialogResult.OK) {
+                    BackgroundImage = null;
+                    BackgroundImage = new Bitmap(ofd.FileName);
+                    BackgroundImageLayout = ImageLayout.Stretch;
+
+                
+                }
+            
+            }
+        }
         }
         }
     
