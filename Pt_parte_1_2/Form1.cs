@@ -20,6 +20,8 @@ namespace Pt_parte_1_2
         {
             InitializeComponent();
         }
+        string prog;
+
            [DllImport("user32.dll")]
         static extern IntPtr SetParent(IntPtr hwc, IntPtr hwp);
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
@@ -32,8 +34,9 @@ namespace Pt_parte_1_2
             {
                 if (pictureBox1.Image == null)
                 {
-            pictureBox1.BackgroundImage = new Bitmap(ofd.FileName);
-            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+                    prog = ofd.FileName;
+           // pictureBox1.BackgroundImage = new Bitmap(ofd.FileName);
+          //  pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
                     removeToolStripMenuItem.Enabled = true;
                     addToolStripMenuItem.Enabled = false;
 
@@ -142,7 +145,7 @@ namespace Pt_parte_1_2
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            Process P = Process.Start("calc.exe");
+            Process P = Process.Start(prog);
             Thread.Sleep(500);
             P.WaitForInputIdle();
             SetParent(P.MainWindowHandle, this.Handle);
