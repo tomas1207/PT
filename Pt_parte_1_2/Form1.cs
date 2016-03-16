@@ -150,12 +150,13 @@ namespace Pt_parte_1_2
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            //comerçar o programa fora da form
             if (prog != null)
             {
                 Process P = Process.Start(prog);
                 Thread.Sleep(500);
                 P.WaitForInputIdle();
-                SetParent(P.MainWindowHandle, this.Handle);
+                SetParent(P.Handle, this.Handle);
             }
             else { MessageBox.Show("Erro falta de programa", "Erro 2"); }
         }
@@ -167,15 +168,17 @@ namespace Pt_parte_1_2
 
         private void addToolStripMenuItem3_Click(object sender, EventArgs e)
         {
+            // add programa
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Upload a program";
             ofd.Filter = "Program |*.*";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-
+                //por icon
                 Icon icon = Icon.ExtractAssociatedIcon(ofd.FileName);
-                this.Icon = icon;
+            
                pictureBox1.Image = icon.ToBitmap();
+                //end icon
                 prog = ofd.FileName;
                
             }
@@ -187,8 +190,9 @@ namespace Pt_parte_1_2
 
         private void removeToolStripMenuItem2_Click(object sender, EventArgs e)
         {
+            // remover Programa
             prog = null;
-            pictureBox1.BackgroundImage = null;
+            pictureBox1.Image = null;
 
         }   
    }
