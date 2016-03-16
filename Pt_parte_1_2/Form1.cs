@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Threading;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Pt_parte_1_2
 {
@@ -16,7 +20,8 @@ namespace Pt_parte_1_2
         {
             InitializeComponent();
         }
-
+           [DllImport("user32.dll")]
+        static extern IntPtr SetParent(IntPtr hwc, IntPtr hwp);
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -115,7 +120,35 @@ namespace Pt_parte_1_2
             
             }
         }
+
+        private void addToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            DialogResult result = fbd.ShowDialog();
+            
+            string[] files = Directory.GetFiles(fbd.SelectedPath);
+            MessageBox.Show("Files Found " + files.Length.ToString(), "Message");
         }
+
+        private void addTry2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+ 
+
+            }
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Process P = Process.Start("calc.exe");
+            Thread.Sleep(500);
+            P.WaitForInputIdle();
+            SetParent(P.MainWindowHandle, this.Handle);
+
+        }   
+   }
+}
     
 
