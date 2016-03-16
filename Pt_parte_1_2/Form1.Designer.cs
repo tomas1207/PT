@@ -41,6 +41,8 @@
             this.folderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.addTry2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.programsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +62,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ficheirosToolStripMenuItem,
             this.backgroundImageToolStripMenuItem,
-            this.folderToolStripMenuItem});
+            this.folderToolStripMenuItem,
+            this.programsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(713, 24);
@@ -80,21 +83,21 @@
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.addToolStripMenuItem.Text = "Add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
             // removeToolStripMenuItem
             // 
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.removeToolStripMenuItem.Text = "Remove";
             this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
@@ -153,6 +156,22 @@
             this.addTry2ToolStripMenuItem.Text = "Add try2";
             this.addTry2ToolStripMenuItem.Click += new System.EventHandler(this.addTry2ToolStripMenuItem_Click);
             // 
+            // programsToolStripMenuItem
+            // 
+            this.programsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem3});
+            this.programsToolStripMenuItem.Name = "programsToolStripMenuItem";
+            this.programsToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.programsToolStripMenuItem.Text = "Programs";
+            this.programsToolStripMenuItem.Click += new System.EventHandler(this.programsToolStripMenuItem_Click);
+            // 
+            // addToolStripMenuItem3
+            // 
+            this.addToolStripMenuItem3.Name = "addToolStripMenuItem3";
+            this.addToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.addToolStripMenuItem3.Text = "Add";
+            this.addToolStripMenuItem3.Click += new System.EventHandler(this.addToolStripMenuItem3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -187,6 +206,8 @@
         private System.Windows.Forms.ToolStripMenuItem folderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem addTry2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem programsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem3;
     }
 }
 

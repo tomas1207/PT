@@ -34,14 +34,14 @@ namespace Pt_parte_1_2
             {
                 if (pictureBox1.Image == null)
                 {
-                    prog = ofd.FileName;
-           // pictureBox1.BackgroundImage = new Bitmap(ofd.FileName);
-          //  pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+                    pictureBox1.BackgroundImage = new Bitmap(ofd.FileName);
+                      pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+                   
                     removeToolStripMenuItem.Enabled = true;
                     addToolStripMenuItem.Enabled = false;
 
                 }
-                else { MessageBox.Show("Errrrrrrooo!"); }
+                else { MessageBox.Show("Errrrrrrooo!" , "Erro 0" ); }
                 }
             //dlg.Dispose();
             }
@@ -78,7 +78,7 @@ namespace Pt_parte_1_2
 
                 }
             }
-            else { MessageBox.Show("Miss image","Erroo", MessageBoxButtons.OK);
+            else { MessageBox.Show("Miss image","Erroo 1", MessageBoxButtons.OK);
             }
         }
 
@@ -145,10 +145,31 @@ namespace Pt_parte_1_2
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            Process P = Process.Start(prog);
-            Thread.Sleep(500);
-            P.WaitForInputIdle();
-            SetParent(P.MainWindowHandle, this.Handle);
+            if (prog != null)
+            {
+                Process P = Process.Start(prog);
+                Thread.Sleep(500);
+                P.WaitForInputIdle();
+                SetParent(P.MainWindowHandle, this.Handle);
+            }
+            else { MessageBox.Show("Erro falta de programa", "Erro 2"); }
+        }
+
+        private void programsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Upload a program";
+            ofd.Filter = "|*.exe";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                prog = ofd.FileName;
+            }
+            else{MessageBox.Show("Erro desconhecido", "Erro -1" );}
 
         }   
    }
