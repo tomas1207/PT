@@ -45,7 +45,7 @@ namespace Pt_parte_1_2
                 }
                 else { MessageBox.Show("Errrrrrrooo!" , "Erro 0" ); }
             }
-            else { MessageBox.Show("Erro desconhecido", "Erro -1"); }
+            else { MessageBox.Show("is not a fatal erro", "Erro -1"); }
             //dlg.Dispose();
             }
 
@@ -116,7 +116,7 @@ namespace Pt_parte_1_2
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Edit image";
-            ofd.FileName = "upload image|.png";
+            ofd.FileName = "Upload image|.png";
             if (BackgroundImage != null) {
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     BackgroundImage = null;
@@ -158,7 +158,7 @@ namespace Pt_parte_1_2
                 P.WaitForInputIdle();
                 SetParent(P.Handle, this.Handle);
             }
-            else { MessageBox.Show("Erro falta de programa", "Erro 2"); }
+            else { MessageBox.Show("Erro missing a program", "Erro 2"); }
         }
 
         private void programsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -182,7 +182,7 @@ namespace Pt_parte_1_2
                 prog = ofd.FileName;
                
             }
-            else{MessageBox.Show("Erro desconhecido", "Erro -1" );}
+            else{MessageBox.Show("is not a fatal erro", "Erro -1" );}
 
         }
 
