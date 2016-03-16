@@ -28,21 +28,24 @@ namespace Pt_parte_1_2
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Upload files";
-            ofd.Filter = "All type for the programs | *.*";
+            ofd.Filter = "All type for the programs | *.jpg; *.png";
            
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 if (pictureBox1.Image == null)
                 {
-                    pictureBox1.BackgroundImage = new Bitmap(ofd.FileName);
+                    pictureBox1.Enabled = false;
+
+                      pictureBox1.BackgroundImage = new Bitmap(ofd.FileName);
                       pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
                    
-                    removeToolStripMenuItem.Enabled = true;
+              removeToolStripMenuItem.Enabled = true;
                     addToolStripMenuItem.Enabled = false;
 
                 }
                 else { MessageBox.Show("Errrrrrrooo!" , "Erro 0" ); }
-                }
+            }
+            else { MessageBox.Show("Erro desconhecido", "Erro -1"); }
             //dlg.Dispose();
             }
 
@@ -50,6 +53,8 @@ namespace Pt_parte_1_2
         {
             if (pictureBox1 != null)
             {
+                pictureBox1.Enabled = true;
+
                 pictureBox1.BackgroundImage = null;
                 removeToolStripMenuItem.Enabled = false;
                 addToolStripMenuItem.Enabled = true;
@@ -164,12 +169,26 @@ namespace Pt_parte_1_2
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Upload a program";
-            ofd.Filter = "|*.exe";
+            ofd.Filter = "Program |*.*";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+
+                Icon icon = Icon.ExtractAssociatedIcon(ofd.FileName);
+                this.Icon = icon;
+               pictureBox1.Image = icon.ToBitmap();
                 prog = ofd.FileName;
+               
             }
             else{MessageBox.Show("Erro desconhecido", "Erro -1" );}
+
+        }
+
+        
+
+        private void removeToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            prog = null;
+            pictureBox1.BackgroundImage = null;
 
         }   
    }
