@@ -96,7 +96,8 @@ namespace Pt_parte_1_2
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Into image";
-            ofd.FileName = "Image .jpg|.png ";
+            ofd.Filter = "|*.png *.jpg";
+            ofd.FileName = "Image";
             if (ofd.ShowDialog() == DialogResult.OK) {
                 BackgroundImage = new Bitmap(ofd.FileName);
                 BackgroundImageLayout = ImageLayout.Stretch;
@@ -109,6 +110,7 @@ namespace Pt_parte_1_2
             if (BackgroundImage != null) {
                 BackgroundImage = null;
 
+
             }
         }
 
@@ -116,7 +118,8 @@ namespace Pt_parte_1_2
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Edit image";
-            ofd.FileName = "Upload image|.png";
+            ofd.FileName = "Upload image";
+            ofd.Filter = "|*.png *.jpg";
             if (BackgroundImage != null) {
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     BackgroundImage = null;
@@ -174,15 +177,18 @@ namespace Pt_parte_1_2
             ofd.Filter = "Program |*.*";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+        
+
                 //por icon
                 Icon icon = Icon.ExtractAssociatedIcon(ofd.FileName);
-            
-               pictureBox1.Image = icon.ToBitmap();
+
+                pictureBox1.Image = icon.ToBitmap();
                 //end icon
                 prog = ofd.FileName;
                
             }
-            else{MessageBox.Show("is not a fatal erro", "Erro -1" );}
+
+            else { MessageBox.Show("is not a fatal erro", "Erro -1"); }
 
         }
 
@@ -194,6 +200,7 @@ namespace Pt_parte_1_2
             prog = null;
             pictureBox1.Image = null;
 
+      
         }   
    }
 }
