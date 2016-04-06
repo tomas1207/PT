@@ -16,6 +16,10 @@ namespace Pt_parte_1_2
 {
     public partial class Form1 : Form
     {
+        int x_da_form;
+        int x_da_picture;
+        int vez = 0;
+        int[] arrprog; 
         public Form1()
         {
             InitializeComponent();
@@ -42,7 +46,7 @@ namespace Pt_parte_1_2
               removeToolStripMenuItem.Enabled = true;
                     addToolStripMenuItem.Enabled = false;
 
-                }
+                  }
                 else { MessageBox.Show("Errrrrrrooo!" , "Erro 0" ); }
             }
             else { MessageBox.Show("is not a fatal erro", "Erro -1"); }
@@ -96,7 +100,7 @@ namespace Pt_parte_1_2
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Into image";
-            ofd.Filter = "|*.png *.jpg";
+            ofd.Filter = "*.png |*.jpg";
             ofd.FileName = "Image";
             if (ofd.ShowDialog() == DialogResult.OK) {
                 BackgroundImage = new Bitmap(ofd.FileName);
@@ -171,19 +175,41 @@ namespace Pt_parte_1_2
 
         private void addToolStripMenuItem3_Click(object sender, EventArgs e)
         {
+         int npb = 2;
+         int possicaox = 27;
+    
             // add programa
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Upload a program";
-            ofd.Filter = "Program |*.*";
+            ofd.Filter = "Program |*.exe*";
+            PictureBox pb = new PictureBox();
+            npb += 1;
+            pb.Name = "pictureBox" + npb.ToString();
+            pb.Location = new System.Drawing.Point(12,possicaox + 30);
+            pb.Size = new System.Drawing.Size(32, 32);
+            pb.BackColor = Color.White;
+     vez += 1;
+     
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-        
-
+                if (vez == 1) {
                 //por icon
-                Icon icon = Icon.ExtractAssociatedIcon(ofd.FileName);
+       
+                
+                   Icon icon = Icon.ExtractAssociatedIcon(ofd.FileName);
 
-                pictureBox1.Image = icon.ToBitmap();
-                //end icon
+                    pictureBox1.Image = icon.ToBitmap();
+                    //end icon
+
+                }else{
+                    
+                   Icon icon = Icon.ExtractAssociatedIcon(ofd.FileName);
+
+                    pb.Image = icon.ToBitmap();
+                }
+
+  
+
                 prog = ofd.FileName;
                
             }
