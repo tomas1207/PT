@@ -16,10 +16,10 @@ namespace Pt_parte_1_2
 {
     public partial class Form1 : Form
     {
-        int x_da_form;
-        int x_da_picture;
-        int vez = 0;
-        int[] arrprog; 
+        int possicaox = 27;
+        int totaldeckcount = 10;
+        int vez = 1;
+        int i= 0;
         public Form1()
         {
             InitializeComponent();
@@ -100,15 +100,16 @@ namespace Pt_parte_1_2
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Into image";
-            ofd.Filter = "*.png |*.jpg";
+            ofd.Filter = " Image| *.jpg";
             ofd.FileName = "Image";
-            if (ofd.ShowDialog() == DialogResult.OK) {
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
                 BackgroundImage = new Bitmap(ofd.FileName);
                 BackgroundImageLayout = ImageLayout.Stretch;
 
+
             }
         }
-
         private void removeToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (BackgroundImage != null) {
@@ -157,15 +158,7 @@ namespace Pt_parte_1_2
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            //comerçar o programa fora da form
-            if (prog != null)
-            {
-                Process P = Process.Start(prog);
-                Thread.Sleep(500);
-                P.WaitForInputIdle();
-                SetParent(P.Handle, this.Handle);
-            }
-            else { MessageBox.Show("Erro missing a program", "Erro 2"); }
+    
         }
 
         private void programsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -175,47 +168,52 @@ namespace Pt_parte_1_2
 
         private void addToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-         int npb = 2;
-         int possicaox = 27;
-    
+      
             // add programa
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Upload a program";
             ofd.Filter = "Program |*.exe*";
-            PictureBox pb = new PictureBox();
-            npb += 1;
-            pb.Name = "pictureBox" + npb.ToString();
-            pb.Location = new System.Drawing.Point(12,possicaox + 30);
-            pb.Size = new System.Drawing.Size(32, 32);
-            pb.BackColor = Color.White;
-     vez += 1;
-     
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                if (vez == 1) {
-                //por icon
-       
-                
-                   Icon icon = Icon.ExtractAssociatedIcon(ofd.FileName);
 
+            PictureBox[] pbName = new PictureBox[totaldeckcount];
+            
+            
+
+            for ( i = 0; i < totaldeckcount-1; i++)
+            {
+                pbName[i] = new PictureBox();
+                pbName[i].Location = new Point(possicaox += 30, 27);
+                pbName[i].Size = new Size(32, 32);
+                pbName[i].BackgroundImageLayout = ImageLayout.Stretch;
+                pbName[i].Visible = true;
+                this.Controls.Add(pbName[i]);  
+            }
+            if (vez == 1)
+            {
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    Icon icon = Icon.ExtractAssociatedIcon(ofd.FileName);
                     pictureBox1.Image = icon.ToBitmap();
                     //end icon
-
-                }else{
-                    
-                   Icon icon = Icon.ExtractAssociatedIcon(ofd.FileName);
-
-                    pb.Image = icon.ToBitmap();
+                    prog = ofd.FileName;
+                    vez = 2;
                 }
 
-  
+                else { MessageBox.Show("Not a fatal error np my friend :P", "Errrrrrrrrrrrrooooo but no problem im here because you close me :( "); }
 
-                prog = ofd.FileName;
-               
             }
+            else
+            {
+                
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    Icon icon = Icon.ExtractAssociatedIcon(ofd.FileName);
+                    pbName[i].Image = icon.ToBitmap();
+                  
+                    prog = ofd.FileName;
 
-            else { MessageBox.Show("is not a fatal erro", "Erro -1"); }
-
+                }
+                else { MessageBox.Show("Erro"); }
+            }
         }
 
         
@@ -225,9 +223,32 @@ namespace Pt_parte_1_2
             // remover Programa
             prog = null;
             pictureBox1.Image = null;
-
+            vez = 1;
       
-        }   
+        }
+
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click_2(object sender, EventArgs e)
+        {
+            iniciar();
+
+        }
+        private void iniciar()
+        {
+                 //comerçar o programa fora da form
+            if (prog != null)
+            {
+                Process P = Process.Start(prog);
+                Thread.Sleep(5000);
+                P.WaitForInputIdle();
+                SetParent(P.Handle, this.Handle);
+            }
+            else { MessageBox.Show("Erro missing a program", "Erro 2"); }
+        }
    }
 }
     
