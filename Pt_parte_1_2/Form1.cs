@@ -175,11 +175,10 @@ namespace Pt_parte_1_2
             ofd.Filter = "Program |*.exe*";
 
             PictureBox[] pbName = new PictureBox[totaldeckcount];
-            
-            
-
+            Label lb = new Label();
             for ( i = 0; i < totaldeckcount-1; i++)
             {
+                lb.Text = i.ToString();
                 pbName[i] = new PictureBox();
                 pbName[i].Location = new Point(possicaox += 30, 27);
                 pbName[i].Size = new Size(32, 32);
@@ -187,6 +186,7 @@ namespace Pt_parte_1_2
                 pbName[i].Visible = true;
                 this.Controls.Add(pbName[i]);  
             }
+            
             if (vez == 1)
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
