@@ -41,6 +41,7 @@
             this.addToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cPUStreesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -50,7 +51,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ficheirosToolStripMenuItem,
             this.backgroundImageToolStripMenuItem,
-            this.programsToolStripMenuItem});
+            this.programsToolStripMenuItem,
+            this.cPUStreesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(713, 24);
@@ -153,6 +155,13 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_2);
             // 
+            // cPUStreesToolStripMenuItem
+            // 
+            this.cPUStreesToolStripMenuItem.Name = "cPUStreesToolStripMenuItem";
+            this.cPUStreesToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.cPUStreesToolStripMenuItem.Text = "CPUStrees";
+            this.cPUStreesToolStripMenuItem.Click += new System.EventHandler(this.cPUStreesToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -187,6 +196,7 @@
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem cPUStreesToolStripMenuItem;
     }
 }
 

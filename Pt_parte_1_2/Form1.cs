@@ -249,6 +249,12 @@ namespace Pt_parte_1_2
             }
             else { MessageBox.Show("Erro missing a program", "Erro 2"); }
         }
+
+        private void cPUStreesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 f2 = new Form2();
+            f2.Show();
+        }
    }
 }
     
