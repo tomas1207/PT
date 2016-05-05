@@ -51,7 +51,7 @@ namespace Pt_parte_1_2
                 for (int i = 0; i < Environment.ProcessorCount; i++)
                 {
                     int cpuUsage = cpuUsageIncreaseby;
-                    int time = 6000;
+                    int time = 20000;
                     List<Thread> threads = new List<Thread>();
                     for (int j = 0; j < Environment.ProcessorCount; j++)
                     {
@@ -62,13 +62,11 @@ namespace Pt_parte_1_2
                     Thread.Sleep(time);
                     foreach (var t in threads)
                     {
-                        t.Abort();
-                        
+                        t.Abort();     
                     }
-                    Application.Restart();
-                    Thread.Sleep(20);
-
-                   
+                    this.Close();
+                  
+                    Thread.Sleep(20);                   
                 }
             }
         }
@@ -89,17 +87,17 @@ namespace Pt_parte_1_2
         }
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (this.backgroundWorker1.CancellationPending)
+            if (this.backgroundWorker1.CancellationPending == true)
             {  
-                
                 e.Cancel = true;
             return;
+              
             }
             else
             {
                 test();
 
-             //  backgroundWorker1.WorkerSupportsCancellation = true;
+              backgroundWorker1.WorkerSupportsCancellation = true;
             }
 
         }
@@ -111,25 +109,24 @@ namespace Pt_parte_1_2
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            
             if (e.Cancelled)
             {
                 escreve("CPU Stress has been cancel");
             }
             else {
-                escreve("CPU Stress haas been end");
+                escreve("CPU Stress has been end");
             }
         }
-        private void escreve(string text) {
+        public void escreve(string text) {
             MessageBox.Show(text);
         }
         private void button2_Click(object sender, EventArgs e)
         {
-      
-                backgroundWorker1.CancelAsync();
-               backgroundWorker1.Dispose();
-            backgroundWorker1 = null;
            
-          
+                backgroundWorker1.CancelAsync();
+
+   
         }
     }
 }
