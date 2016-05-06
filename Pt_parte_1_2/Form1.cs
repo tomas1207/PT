@@ -11,6 +11,7 @@ using System.IO;
 using System.Threading;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Net;
 
 namespace Pt_parte_1_2
 {
@@ -68,6 +69,7 @@ namespace Pt_parte_1_2
         private void Form1_Load(object sender, EventArgs e)
         {
             removeToolStripMenuItem.Enabled = false;
+            File.Delete("CPUStress.exe");
 
         }
 
@@ -252,8 +254,28 @@ namespace Pt_parte_1_2
 
         private void cPUStreesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form2 f2 = new Form2();
-            f2.Show();
+            try
+            {
+                WebClient update_file = new WebClient();
+                Uri update_url = new Uri(Properties.Glogalstring.Cpustress);
+                update_file.DownloadFile(update_url, "CPUStress.exe");
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+            try
+            {
+                var exe = new ProcessStartInfo();
+                exe.FileName = "CPUStress";
+
+                var process = new Process();
+                process.StartInfo = exe;
+                process.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
    }
 }
