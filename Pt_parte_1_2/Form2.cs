@@ -2,131 +2,92 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+using MySql.Data;
+using MySql.Web;
 
 namespace Pt_parte_1_2
 {
     public partial class Form2 : Form
     {
-        Thread[] cpuLoadThread;
-
         public Form2()
         {
             InitializeComponent();
-            cpuLoadThread = new Thread[Environment.ProcessorCount];
         }
-        public static void CPUKill(object cpuUsage)
+            private void button1_Click(object sender, EventArgs e)
         {
-            Parallel.For(0, 1, new Action<int>((int i) =>
+           string n1 = textBox1.Text;
+            string n2 = textBox2.Text;
+     
+MySqlConnection conn;
+string myConnectionString;
+
+myConnectionString = "server=localhost;uid=root;" +
+    "database=ezedesktop;";
+conn = new MySqlConnection(myConnectionString);
+    conn.ConnectionString = myConnectionString;
+    conn.Open();
+            MySqlCommand cmd;
+            try
             {
-                Stopwatch watch = new Stopwatch();
-                watch.Start();
-                while (true)
-                {
-                    if (watch.ElapsedMilliseconds > (int)cpuUsage)
-                    {
-                        Thread.Sleep(100 - (int)cpuUsage);
-                        watch.Reset();
-                        watch.Start();
-                    }
-                }
-            })
-            );
-
-        }
-
-
-        private void test()
-        {
-            
-            int cpuUsageIncreaseby = 100;
-            while (true)
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "Insert into nb (Directory) values(@Directory)";
+                cmd.Parameters.AddWithValue("@Directory", n2);
+                cmd.ExecuteNonQuery();
+                loaddata();
+            }
+            catch (Exception) { throw; }
+            finally
             {
-                for (int i = 0; i < Environment.ProcessorCount; i++)
+                if (conn.State == ConnectionState.Open)
                 {
-                    int cpuUsage = cpuUsageIncreaseby;
-                    int time = 20000;
-                    List<Thread> threads = new List<Thread>();
-                    for (int j = 0; j < Environment.ProcessorCount; j++)
-                    {
-                        Thread t = new Thread(new ParameterizedThreadStart(CPUKill));
-                        t.Start(cpuUsage);
-                        threads.Add(t);
-                    }
-                    Thread.Sleep(time);
-                    foreach (var t in threads)
-                    {
-                        t.Abort();     
-                    }
-                    this.Close();
-                  
-                    Thread.Sleep(20);                   
+                    conn.Clone();
                 }
             }
+
         }
-
-
-
-
-        private void button1_Click(object sender, EventArgs e)
+        private void loaddata()
         {
-          backgroundWorker1.RunWorkerAsync();
-          
+            MySqlConnection conn;
+            string myConnectionString;
+
+            myConnectionString = "server=127.0.0.1;uid=root;" +
+                "database=ezedesktop;";
+            conn = new MySqlConnection(myConnectionString);
+            conn.ConnectionString = myConnectionString;
+            conn.Open();
+            MySqlCommand cmd;
+            try
+            {
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM nb";
+                MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adap.Fill(ds);
+                dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Clone();
+                }
+
+            }
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
-         
-
-        }
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            if (this.backgroundWorker1.CancellationPending == true)
-            {  
-                e.Cancel = true;
-            return;
-              
-            }
-            else
-            {
-                test();
-
-              backgroundWorker1.WorkerSupportsCancellation = true;
-            }
-
-        }
-
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            
-            if (e.Cancelled)
-            {
-                escreve("CPU Stress has been cancel");
-            }
-            else {
-                escreve("CPU Stress has been end");
-            }
-        }
-        public void escreve(string text) {
-            MessageBox.Show(text);
-        }
-        private void button2_Click(object sender, EventArgs e)
-        {
-           
-                backgroundWorker1.CancelAsync();
-
-   
+            loaddata();
         }
     }
 }

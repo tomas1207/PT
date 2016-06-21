@@ -61,7 +61,7 @@ namespace Pt_parte_1_2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://www.dropbox.com/s/gc1bfoq1dvy3sve/CPUStress.exe?dl=1.
+        ///   Looks up a localized string similar to https://www.dropbox.com/s/dlzjfjdkgmk94c2/CPUStress.exe?dl=1.
         /// </summary>
         public static string Cpustress {
             get {
