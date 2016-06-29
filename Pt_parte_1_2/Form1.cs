@@ -15,12 +15,15 @@ using System.Net;
 using Pt_parte_1_2.Properties;
 using MySql;
 using MySql.Data.MySqlClient;
+using System.Reflection;
+using IWshRuntimeLibrary;
+
 
 
 
 namespace Pt_parte_1_2
 {
-    public partial class Form1 : Form
+       public partial class Form1 : Form
     {
         int possicaox = 27;
         int totaldeckcount = 100;
@@ -116,7 +119,7 @@ namespace Pt_parte_1_2
                 pic.Click += this.PictureClick;
             
             removeToolStripMenuItem.Enabled = false;
-            File.Delete("CPUStress.exe");
+            //File.Delete("CPUStress.exe");
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -326,14 +329,32 @@ namespace Pt_parte_1_2
         private void removeToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             // remover Programa
-           if (vez == 1){
-           pictureBox1.Image = null;
 
-           }else{
-           
-           }
+            MySqlConnection conn;
+            string myConnectionString;
 
+            myConnectionString = "server=localhost;uid=root;" +
+                "database=ezedesktop;";
+            conn = new MySqlConnection(myConnectionString);
+            conn.ConnectionString = myConnectionString;
+            conn.Open();
+            MySqlCommand cmd;
+            try
+            {
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "DELETE FROM `nb` WHERE `nb`.`NPB` = 1"; 
+                cmd.ExecuteNonQuery();          
+            }
+            catch (Exception) { throw; }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Clone();
+                }
+            }
         }
+    
 
         private void pictureBox1_Click_1(object sender, EventArgs e)
         {
@@ -380,7 +401,7 @@ namespace Pt_parte_1_2
       
                     Process P = Process.Start(dt.Rows[picclick-1][1].ToString());
                     Thread.Sleep(2500);
-                    // P.WaitForInputIdle();
+                    //P.WaitForInputIdle();
                     SetParent(P.Handle, this.Handle);
             }
         }
@@ -446,11 +467,15 @@ namespace Pt_parte_1_2
         private string getfilename(string name) {
             return Path.GetFileNameWithoutExtension(name);
         }
-        private string getdirectory(string dir) {
-            return Path.GetFullPath(dir);
+
+        private string getdirectory(string treeNode)
+        { return Path.GetDirectoryName(treeNode); }
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
 
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
